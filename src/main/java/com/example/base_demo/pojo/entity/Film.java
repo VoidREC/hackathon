@@ -17,7 +17,7 @@ public class Film {
     String title;
 
     @Column(name = "description")
-    String dwscription;
+    String description;
 
     @Column(name = "release_year")
     String release_year;
