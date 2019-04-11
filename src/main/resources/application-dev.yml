@@ -1,0 +1,13 @@
+spring:
+  datasource:
+    username: fzulive
+    password: fzulive
+    url: jdbc:mysql://47.106.83.201:3306/java_demo?useSSL=false&serverTimezone=Asia/Shanghai
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  mvc:
+    view:
+      suffix: .html
+      prefix: /
+server:
+  port: 8080
+

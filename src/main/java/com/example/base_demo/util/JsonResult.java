@@ -1,7 +1,11 @@
 package com.example.base_demo.util;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import lombok.Getter;
+import lombok.Setter;
 
+@Setter
+@Getter
 public class JsonResult {
 
     /**
@@ -22,6 +26,10 @@ public class JsonResult {
 
     public static JsonResult ok(Object data){
         return new JsonResult(data);
+    }
+
+    public static JsonResult ok(String message){
+        return new JsonResult(message);
     }
 
     private JsonResult(Object data) {
