@@ -4,6 +4,10 @@ spring:
     password: fzulive
     url: jdbc:mysql://172.17.12.144:3306/java_demo?useSSL=false&serverTimezone=Asia/Shanghai
     driver-class-name: com.mysql.cj.jdbc.Driver
+  mvc:
+    view:
+      suffix: .html
+      prefix: /
 
 server:
   port: 80
