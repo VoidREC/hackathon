@@ -1,5 +1,6 @@
 package com.example.base_demo.service.impl;
 
+import com.example.base_demo.exception.StudentLoginIncorrectException;
 import com.example.base_demo.mapper.OneTermDownMapper;
 import com.example.base_demo.mapper.OneTermUpMapper;
 import com.example.base_demo.mapper.TwoTermDownMapper;
@@ -27,25 +28,24 @@ public class ScoreServieImpl implements ScoreService {
     }
 
     @Override
-    public StudentScoreVO getOneScore(ScoreInfoDTO dto) {
-        StudentScoreVO studentScoreVO = new StudentScoreVO();
+    public Object getOneScore(ScoreInfoDTO dto) {
         if (dto.getTerm()==1){
             OneTermUp oneTermUp = oneTermUpMapper.selectByPrimaryKey(dto.getUid());
-            BeanUtils.copyProperties(oneTermUp,studentScoreVO);
+            return oneTermUp;
         }
         if (dto.getTerm()==2){
             OneTermDown oneTermDown = oneTermDownMapper.selectByPrimaryKey(dto.getUid());
-            BeanUtils.copyProperties(oneTermDown,studentScoreVO);
+            return oneTermDown;
         }
         if (dto.getTerm()==3){
             TwoTermUp twoTermUp = twoTermUpMapper.selectByPrimaryKey(dto.getUid());
-            BeanUtils.copyProperties(twoTermUp,studentScoreVO);
+            return twoTermUp;
         }
         if (dto.getTerm()==4){
             TwoTermDown TwoTermDown = twoTermDownMapper.selectByPrimaryKey(dto.getUid());
-            BeanUtils.copyProperties(TwoTermDown,studentScoreVO);
+            return twoTermDownMapper;
         }
-        return studentScoreVO;
+        else throw new StudentLoginIncorrectException("不正确的学号");
     }
 
 }
