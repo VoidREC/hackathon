@@ -28,9 +28,10 @@ public class JsonResult {
         return new JsonResult(data);
     }
 
-    public static JsonResult ok(String message){
-        return new JsonResult(message);
+    public static JsonResult ok(){
+        return new JsonResult(null);
     }
+
 
     private JsonResult(Object data) {
         this.status = 0;

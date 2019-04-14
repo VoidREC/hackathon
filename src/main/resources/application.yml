@@ -1,3 +1,6 @@
 spring:
   profiles:
     active: prod
+
+  jackson:
+    default-property-inclusion: non_null
