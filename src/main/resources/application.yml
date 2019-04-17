@@ -5,5 +5,28 @@ spring:
   jackson:
     default-property-inclusion: non_null
 
+  redis:
+    database: 0
+    host: 47.106.83.201
+    port: 6379
+    timeout: 1000
+    jedis:
+      pool:
+        max-active: 10
+        max-idle: 8
+        min-idle: 2
+        max-wait: 100
+
 mybatis:
+  configuration:
+    use-generated-keys: true
+    use-column-label: true
+    map-underscore-to-camel-case: true
+    auto-mapping-behavior: full
+  type-aliases-package: com.example.base_demo.pojo.entity
   mapper-locations: classpath:com.example.base_demo.mapper/**.xml
+
+web:
+  url:
+    root: http://47.106.83.201
+    file: ${web.url.root}/files

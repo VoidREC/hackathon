@@ -8,12 +8,13 @@ import org.springframework.context.annotation.Primary;
 import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.io.Serializable;
 
 @Getter
 @Setter
 @ToString
 @Table(name = "student")
-public class Student {
+public class Student implements Serializable {
 
     @Id
     @Column(name = "uid")
@@ -26,11 +27,14 @@ public class Student {
     Integer grade;
 
     @Column(name = "class")
-    Integer className;
+    Integer classNumber;
 
     @Column(name = "monitor")
     Integer monitor;
 
     @Column(name = "password")
     String password;
+
+    @Column(name = "major")
+    String major;
 }

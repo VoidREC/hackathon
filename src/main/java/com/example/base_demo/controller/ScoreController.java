@@ -5,6 +5,7 @@ import com.example.base_demo.service.ScoreService;
 import com.example.base_demo.util.JsonResult;
 import org.springframework.web.bind.annotation.*;
 
+@CrossOrigin
 @RestController
 public class ScoreController {
 
@@ -18,5 +19,10 @@ public class ScoreController {
     public JsonResult getOneScore(@RequestBody ScoreInfoDTO dto){
 
         return JsonResult.ok(scoreService.getOneScore(dto));
+    }
+
+    @PostMapping("/getAllScore")
+    public JsonResult getAllScore(@RequestBody ScoreInfoDTO dto){
+        return JsonResult.ok(scoreService.getAllScore(dto.getTerm(),dto.getClassNumber()));
     }
 }

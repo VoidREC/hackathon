@@ -6,20 +6,12 @@ import lombok.ToString;
 
 import java.io.Serializable;
 
-@Getter
 @Setter
+@Getter
 @ToString
-public class SubjectInfoVO implements Serializable {
+public class OneStudentScoreVO implements Serializable {
 
+    Integer score;
+    Integer rank;
     String subjectName;
-
-    Integer classNumber;
-
-    Integer term;
-
-    String average;
-
-    String excellentRate;
-
-    String  passRate;
 }
