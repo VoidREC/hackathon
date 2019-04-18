@@ -26,6 +26,6 @@ public class FileController {
         if (multipartFile.isEmpty()) {
             throw new FileEmptyException("上传的文件必须非空");
         }
-        return new JsonResult.ok(fileService.saveFile(multipartFile, userId));
+        return null;
     }
 }

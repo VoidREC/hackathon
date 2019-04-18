@@ -82,18 +82,48 @@ public class ScoreServieImpl implements ScoreService {
     }
 
     @Override
-    @Cacheable(key = "'Score'+#term+#classNumber")
+    @Cacheable(key = "'Score_use_2'+#term+#classNumber")
     public List<OneScoreVO> getAllScore(Integer term,Integer classNumber) {
 
         List<OneScoreVO>  oneScoreVOList = new ArrayList<>();
 
         //获得同班级内的学生
         List<Student> studentList = studentMapper.geSutdentByClassNumber(classNumber);
+        List<String> uidList = new ArrayList<>();
         for (Student student:studentList){
-            ScoreInfoDTO example = new ScoreInfoDTO();
-            example.setUid(student.getUid());
-            example.setTerm(term);
-            oneScoreVOList.add(getOneScore(example));
+            uidList.add(student.getUid());
+        }
+//        for (Student student:studentList){
+//            ScoreInfoDTO example = new ScoreInfoDTO();
+//            example.setUid(student.getUid());
+//            example.setTerm(term);
+//            OneScoreVO oneScoreVO = getOneScore(example);
+//
+//            oneScoreVOList.add(getOneScore(example));
+//        }
+        //获得一学期内的科目
+        List<Subject> subjectList = subjectMapper.getSubjectByTerm(term);
+
+        for (Student student:studentList){
+            OneScoreVO oneScoreVO = new OneScoreVO();
+            List<OneScoreVO.SubjectInfo> subjectInfoList = new ArrayList<>();
+            int total = 0;
+            for (Subject subject:subjectList){
+                OneStudentScoreVO oneStudentScoreVO = subjectService.getSubjectOneStudentRand(student.getUid(),uidList,subject.getId());
+                oneStudentScoreVO.setSubjectName(subject.getSubjectName());
+                total+=oneStudentScoreVO.getScore();
+                OneScoreVO.SubjectInfo subjectInfo = new OneScoreVO.SubjectInfo();
+                BeanUtils.copyProperties(oneStudentScoreVO,subjectInfo);
+
+                subjectInfoList.add(subjectInfo);
+            }
+            oneScoreVO.setSubjectInfo(subjectInfoList);
+            oneScoreVO.setUid(student.getUid());
+            oneScoreVO.setName(student.getName());
+            oneScoreVO.setTotal(total);
+//            System.out.println(oneScoreVO.getUid());
+//            System.out.println(oneScoreVO.getTotal());
+            oneScoreVOList.add(oneScoreVO);
         }
         return oneScoreVOList;
     }

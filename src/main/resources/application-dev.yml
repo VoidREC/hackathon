@@ -11,3 +11,7 @@ spring:
 server:
   port: 8080
 
+store:
+  file:
+    path: E:/source/IdeaProjects/base/.test/
+    max-path-length: 255
